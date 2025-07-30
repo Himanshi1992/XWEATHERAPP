@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const WeatherApp = () => {
+const Weather = () => {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -64,4 +64,4 @@ const WeatherApp = () => {
     </div>
   );
 };
-export default WeatherApp;
+export default Weather;
