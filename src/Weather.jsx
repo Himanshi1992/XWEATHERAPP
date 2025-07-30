@@ -4,12 +4,15 @@ const Weather = () => {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showLoading, setShowLoading] = useState(false); // Added
   const API_KEY = '77f6554cd14c4b66a2753548253007';
 
   const fetchWeather = async () => {
     if (!city) return;
+    setShowLoading(true); // Immediately show loading message for Cypress test
     setLoading(true);
     setWeather(null);
+
     try {
       const response = await fetch(
         `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`
@@ -23,6 +26,7 @@ const Weather = () => {
       alert('Failed to fetch weather data');
     } finally {
       setLoading(false);
+      setShowLoading(false); // Hide loading after fetch completes
     }
   };
 
@@ -39,7 +43,7 @@ const Weather = () => {
         Search
       </button>
 
-      {loading && <p>Loading data…</p>}
+      {showLoading && <p>Loading data...</p>}
 
       {weather && (
         <div className="weather-cards" style={{ marginTop: '20px' }}>
